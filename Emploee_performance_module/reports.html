@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reports - Atom HR</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background-color: #111;
+      padding: 20px 0;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00c6ff;
+      font-size: 28px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #222;
+      padding: 8px 14px;
+      margin: 0 6px;
+      border-radius: 5px;
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #00c6ff;
+      color: #000;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    section {
+      background-color: #111;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      width: 90%;
+      max-width: 900px;
+    }
+
+    h2 {
+      color: #1abc9c;
+      margin-top: 0;
+      text-align: left;
+    }
+
+    canvas {
+      margin-top: 20px;
+      width: 100% !important;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Performance Reports</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="goals.html">Goals</a>
+      <a href="logout.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Goal Completion Rate</h2>
+      <canvas id="goalChart" width="900" height="350"></canvas>
+
+    </section>
+
+    <section>
+      <h2>Feedback Summary</h2>
+      <canvas id="feedbackChart"  width="800" height="50"></canvas>
+    </section>
+  </main>
+
+  <script src="js/reports.js"></script>
+</body>
+</html>

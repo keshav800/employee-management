@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Atom HR</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      color: #00c6ff;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 1px solid #222;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 20px;
+      background-color: #111;
+      border-bottom: 1px solid #222;
+    }
+
+    .dashboard-nav a {
+      text-decoration: none;
+      padding: 10px 16px;
+      background-color: #222;
+      color: #fff;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard-nav a:hover {
+      background-color: #00c6ff;
+      color: #000;
+    }
+
+    .dashboard-main {
+      flex-grow: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .info-box {
+      background-color: #111;
+      border: 2px solid #1abc9c;
+      border-radius: 10px;
+      padding: 20px 30px;
+      max-width: 500px;
+      box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+    }
+
+    .info-box h2 {
+      color: #1abc9c;
+      margin-bottom: 10px;
+    }
+
+    /* Horizontal chart row */
+    .chart-row {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+
+    .chart-container {
+      min-width: 250px;
+      max-width: 300px;
+      background-color: #111;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #00c6ff;
+      flex-shrink: 0;
+    }
+
+    .chart-container h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #00c6ff;
+      text-align: center;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 200px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-header">Employee Dashboard</header>
+
+  <nav class="dashboard-nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="goals.html">Goals</a>
+    <a href="reports.html">Reports</a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="notifications.html">Notifications</a>
+    <a href="review.html">Review</a>
+    <a href="manager-dashboard.html">Manager Dashboard</a>
+    <a href="help.html">Help</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+
+  <main class="dashboard-main">
+    <section class="info-box">
+      <h2>Welcome, <span id="empName">Employee</span>!</h2>
+      <p>Email: <span id="empEmail">example@gofloww.com</span></p>
+      <p>Employee ID: <span id="empId">EMP12345</span></p>
+    </section>
+
+    <!-- <div class="image-box">
+        <img src="images/dashboard-image.jpg" alt="Dashboard Image" class="dashboard-image">
+    </div>
+</div> -->
+    <div class="chart-row">
+      <div class="chart-container">
+        <h3>360° Performance</h3>
+        <canvas id="employeeChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Feedback Over Time</h3>
+        <canvas id="feedbackChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Goals Progress</h3>
+        <canvas id="goalsChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Reports Overview</h3>
+        <canvas id="reportsChart"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const ctxEmployee = document.getElementById('employeeChart').getContext('2d');
+    const employeeChart = new Chart(ctxEmployee, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [
+          {
+            label: 'Feedback',
+            data: [8, 9, 7, 6, 9, 10],
+            backgroundColor: '#00c6ff',
+          },
+          {
+            label: 'Goals',
+            data: [5, 6, 7, 8, 6, 7],
+            backgroundColor: '#1abc9c',
+          },
+          {
+            label: 'Reports',
+            data: [2, 4, 3, 5, 4, 3],
+            backgroundColor: '#f39c12',
+          },
+          {
+            label: 'Plans',
+            data: [3, 3, 4, 5, 6, 5],
+            backgroundColor: '#9b59b6',
+          },
+          {
+            label: 'Career Goals',
+            type: 'line',
+            data: [1, 2, 3, 4, 5, 6],
+            borderColor: '#e74c3c',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.4,
+            pointBackgroundColor: '#e74c3c',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#fff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
+    });
+
+    const ctxFeedback = document.getElementById('feedbackChart').getContext('2d');
+    const feedbackChart = new Chart(ctxFeedback, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Monthly Feedback',
+          data: [5, 6, 7, 8, 6, 7],
+          borderColor: '#1abc9c',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#fff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
+    });
+
+    const ctxGoals = document.getElementById('goalsChart').getContext('2d');
+    const goalsChart = new Chart(ctxGoals, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Goals Progress',
+          data: [3, 4, 5, 6, 7, 8],
+          backgroundColor: '#9b59b6'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#fff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
+    });
+
+    const ctxReports = document.getElementById('reportsChart').getContext('2d');
+    const reportsChart = new Chart(ctxReports, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Reports Overview',
+          data: [1, 2, 3, 4, 5, 6],
+          backgroundColor: '#f39c12'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#fff'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

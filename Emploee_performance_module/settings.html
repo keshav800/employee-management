@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings - Atom HR</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00c6ff;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #00c6ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 60px;
+    }
+
+    .settings-section {
+      background-color: #111;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,198,255,0.3);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .settings-section h2 {
+      margin-bottom: 20px;
+      color: #1abc9c;
+    }
+
+    .settings-section input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .settings-section button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c6ff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .settings-section button:hover {
+      background-color: #009fd4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Account Settings</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="logout.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="settings-section">
+      <h2>Change Password</h2>
+      <form onsubmit="updatePassword(event)">
+        <input type="password" id="newPassword" placeholder="New Password" required />
+        <button type="submit">Update</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function updatePassword(event) {
+      event.preventDefault();
+      const user = JSON.parse(localStorage.getItem("user"));
+      const newPass = document.getElementById("newPassword").value;
+      user.password = newPass;
+      localStorage.setItem("user", JSON.stringify(user));
+      alert("Password updated successfully!");
+    }
+  </script>
+</body>
+</html>

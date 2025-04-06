@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atom HR - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body.login-body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      /* background-color: #000;  */
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #00bcd4;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input {
+      padding: 12px 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #1c1c1c;
+      color: #fff;
+    }
+    input::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background: linear-gradient(90deg, #007bff, #0056b3); /* Blue gradient */
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0056b3, #007bff);
+    }
+
+    p {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="login-body">
+  <div class="form-container">
+    <h1>Login to Atom HR</h1>
+    <form onsubmit="loginUser(event)">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+  </div>
+  <script src="js/login.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>

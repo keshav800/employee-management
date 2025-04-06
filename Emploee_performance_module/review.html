@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Performance Review - Atom HR</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00c6ff;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 6px 12px;
+      background-color: #222;
+      color: #fff;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #00c6ff;
+      color: #000;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: #111;
+      border: 1px solid #1abc9c;
+      border-radius: 12px;
+      padding: 30px 25px;
+      width: 420px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+    }
+
+    .form-container h2 {
+      color: #1abc9c;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1abc9c;
+      outline: none;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #00c6ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1abc9c;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      color: #1abc9c;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Performance Review</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="review.html">Review</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-container">
+      <h2>Review Form</h2>
+      <form id="reviewForm">
+        <label for="empName">Employee ID</label>
+        <input type="text" id="empName" name="empName" placeholder="Enter Employee ID" required />
+
+        <label for="rating">Performance Rating</label>
+        <select id="rating" name="rating" required>
+          <option value="">-- Select Rating --</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Good">Good</option>
+          <option value="Average">Average</option>
+          <option value="Needs Improvement">Needs Improvement</option>
+        </select>
+
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" placeholder="Write feedback here..." rows="5" required></textarea>
+
+        <button type="submit">Submit Review</button>
+        <p class="success-message" id="successMessage">✅ Review submitted successfully!</p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("reviewForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const reviewData = {
+        name: form.empName.value.trim(),
+        rating: form.rating.value,
+        comments: form.comments.value.trim(),
+      };
+
+      console.log("Review Submitted:", reviewData);
+
+      // You can later send this data to a backend API here
+      // Example: fetch("/api/review", { method: "POST", body: JSON.stringify(reviewData), ... });
+
+      successMessage.style.display = "block";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
